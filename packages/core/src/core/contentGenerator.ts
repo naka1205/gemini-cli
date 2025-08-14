@@ -12,6 +12,7 @@ import {
   EmbedContentResponse,
   EmbedContentParameters,
   GoogleGenAI,
+  setDefaultBaseUrls,
 } from '@google/genai';
 import { createCodeAssistContentGenerator } from '../code_assist/codeAssist.js';
 import { DEFAULT_GEMINI_MODEL } from '../config/models.js';
@@ -54,6 +55,7 @@ export type ContentGeneratorConfig = {
   vertexai?: boolean;
   authType?: AuthType | undefined;
   proxy?: string | undefined;
+  baseUrl?: string | undefined;
 };
 
 export function createContentGeneratorConfig(
@@ -64,6 +66,7 @@ export function createContentGeneratorConfig(
   const googleApiKey = process.env.GOOGLE_API_KEY || undefined;
   const googleCloudProject = process.env.GOOGLE_CLOUD_PROJECT || undefined;
   const googleCloudLocation = process.env.GOOGLE_CLOUD_LOCATION || undefined;
+  const geminiApiBaseUrl = process.env.GEMINI_API_BASE_URL || undefined;
 
   // Use runtime model from config if available; otherwise, fall back to parameter or default
   const effectiveModel = config.getModel() || DEFAULT_GEMINI_MODEL;
@@ -72,6 +75,7 @@ export function createContentGeneratorConfig(
     model: effectiveModel,
     authType,
     proxy: config?.getProxy(),
+    baseUrl: geminiApiBaseUrl,
   };
 
   // If we are using Google auth or we are in Cloud Shell, there is nothing else to validate for now
@@ -132,6 +136,15 @@ export async function createContentGenerator(
     config.authType === AuthType.USE_GEMINI ||
     config.authType === AuthType.USE_VERTEX_AI
   ) {
+
+      if (config.baseUrl) {
+      if (config.vertexai) {
+        setDefaultBaseUrls({ vertexUrl: config.baseUrl });
+      } else {
+        setDefaultBaseUrls({ geminiUrl: config.baseUrl });
+      }
+    }
+
     const googleGenAI = new GoogleGenAI({
       apiKey: config.apiKey === '' ? undefined : config.apiKey,
       vertexai: config.vertexai,

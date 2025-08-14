@@ -1,5 +1,5 @@
 {
-  "name": "@google/gemini-cli",
+  "name": "gemini-code",
   "version": "0.1.21",
   "engines": {
     "node": ">=20.0.0"
@@ -8,13 +8,15 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": "true",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/google-gemini/gemini-cli.git"
   },
   "config": {
     "sandboxImageUri": "us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.1.21"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "start": "node scripts/start.js",
