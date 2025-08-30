@@ -67,7 +67,7 @@ export function createContentGeneratorConfig(
   const googleApiKey = process.env['GOOGLE_API_KEY'] || undefined;
   const googleCloudProject = process.env['GOOGLE_CLOUD_PROJECT'] || undefined;
   const googleCloudLocation = process.env['GOOGLE_CLOUD_LOCATION'] || undefined;
-  const geminiApiBaseUrl = process.env['GEMINI_API_BASE_URL '] || undefined;
+  const geminiApiBaseUrl = process.env['GEMINI_API_BASE_URL'] || undefined;
 
   // Use runtime model from config if available; otherwise, fall back to parameter or default
   const effectiveModel = config.getModel() || DEFAULT_GEMINI_MODEL;
