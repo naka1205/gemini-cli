@@ -155,6 +155,7 @@ export async function createContentGenerator(
         geminiUrl: config.baseUrl,
         vertexUrl: config.baseUrl,
       };
+            console.log(baseUrlParams)
       setDefaultBaseUrls(baseUrlParams);
     }
 
