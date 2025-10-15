@@ -38,7 +38,12 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         <Text bold color={theme.text.accent}>
           /help
         </Text>{' '}
-        for more information.
+        for more information.{' '}API_BASE_URL:{' '}
+        {process.env['GEMINI_API_BASE_URL'] && (
+          <Text bold color={theme.text.accent}>
+            {process.env['GEMINI_API_BASE_URL']}
+          </Text>
+        )}
       </Text>
     </Box>
   );

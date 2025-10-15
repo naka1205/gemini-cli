@@ -1,6 +1,6 @@
 {
-  "name": "@google/gemini-cli",
-  "version": "0.10.0-nightly.20251007.c195a9aa",
+  "name": "gemini-code",
+  "version": "0.3.2",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -8,13 +8,15 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": "true",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/google-gemini/gemini-cli.git"
   },
   "config": {
-    "sandboxImageUri": "us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.10.0-nightly.20251007.c195a9aa"
+    "sandboxImageUri": "us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development node scripts/start.js",
@@ -54,8 +56,7 @@
     "release:version": "node scripts/version.js",
     "telemetry": "node scripts/telemetry.js",
     "check:lockfile": "node scripts/check-lockfile.js",
-    "clean": "node scripts/clean.js",
-    "pre-commit": "node scripts/pre-commit.js"
+    "clean": "node scripts/clean.js"
   },
   "overrides": {
     "wrap-ansi": "9.0.2",
